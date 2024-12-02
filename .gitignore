@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: NONE
+# SPDX-License-Identifier: 0BSD
+
+# pre-commit
+/.pre-commit-config.yaml
+# Nix
+/result*

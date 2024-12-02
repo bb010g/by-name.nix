@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: NONE
+# SPDX-License-Identifier: 0BSD
+
+version = 1
+SPDX-PackageName = "by-name.nix"
+SPDX-PackageVersion = "0.1.0-alpha"
+SPDX-PackageSupplier = "Person: Dusk Banks (me@bb010g.com)"
+SPDX-PackageDownloadLocation = "git+https://github.com/bb010g/by-name.nix.git"
+SPDX-PackageHomePage = "https://github.com/bb010g/by-name.nix"
+SPDX-PackageSummary = "Nix library for name-based, tabular directories"
+SPDX-PrimaryPackagePurpose = "LIBRARY"
+
+[[annotations]]
+path = "**/flake.lock"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "0BSD"
