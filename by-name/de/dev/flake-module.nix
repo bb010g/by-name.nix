@@ -3,35 +3,36 @@
 {
   config,
   inputs,
-  parentFlake,
+  super,
   ...
 }:
 let
-  inherit (parentFlake) outputs;
-  lib = outputs.libs.default;
-  libs.libs =
-    let
-      f = inputs.nixpkgs.lib.__unfix__;
-      overlay = outputs.libOverlays.libs;
-      prev = f final;
-      new = overlay final prev;
-      final = prev // new;
-    in
-    new;
+  lib = super.outputs.libs.default;
+  inherit (config.flake) libs;
 in
 {
-  _file = ./flake.nix;
+  _file = ./flake-module.nix;
   imports = [
     inputs.git-hooks-nix.flakeModule
     inputs.treefmt-nix.flakeModule
   ];
   config.debug = true;
   config.flake = {
-    _file = ./flake.nix;
-    config = outputs // {
-      inherit parentFlake lib;
-      libsLib = config.flake.libs.libs;
-      libs = outputs.libs // libs;
+    _file = ./flake-module.nix;
+    config = super.outputs // {
+      inherit lib super;
+      libsLib = libs.libs;
+      libs = super.outputs.libs // {
+        libs =
+          let
+            f = inputs.nixpkgs.lib.__unfix__;
+            overlay = super.outputs.libOverlays.libs;
+            prev = f final;
+            new = overlay final prev;
+            final = prev // new;
+          in
+          new;
+      };
       examples.bb010g = lib.filesystem.readNameBasedTableDirectory {
         readRowsDirectory = lib.filesystem.readDirectory;
         rowsPath = /home/bb010g/Sources/Sysadmin/bb010g/nix/by-name;
@@ -102,6 +103,7 @@ in
   config.perSystem =
     { config, pkgs, ... }:
     {
+      _file = ./flake-module.nix;
       config.devShells.default = pkgs.callPackage (
         {
           mkShellNoCC,

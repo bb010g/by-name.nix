@@ -17,11 +17,11 @@
   outputs =
     inputs:
     let
-      parentFlake = inputs.getFlake ../../..;
-      devInputs = parentFlake.inputs // { by-name = parentFlake; } // inputs;
+      super = inputs.getFlake ../../..;
     in
     inputs.flake-parts.lib.mkFlake {
-      inputs = devInputs;
-      specialArgs = { inherit parentFlake; };
+      inputs = super.inputs // { inherit super; } // inputs;
+      moduleLocation = ./flake.nix;
+      specialArgs = { inherit super; };
     } ./flake-module.nix;
 }
