@@ -13,6 +13,7 @@ in
 {
   _file = ./flake-module.nix;
   imports = [
+    ../../de/debug/flake-module.nix
     inputs.git-hooks-nix.flakeModule
     inputs.treefmt-nix.flakeModule
   ];
@@ -20,7 +21,7 @@ in
   config.flake = {
     _file = ./flake-module.nix;
     config = super.outputs // {
-      inherit lib super;
+      inherit lib;
       libsLib = libs.libs;
       libs = super.outputs.libs // {
         libs =
