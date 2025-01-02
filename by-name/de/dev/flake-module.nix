@@ -106,19 +106,13 @@ in
     {
       _file = ./flake-module.nix;
       config.devShells.default = pkgs.callPackage (
-        {
-          mkShellNoCC,
-          reuse,
-          ...
-        }:
+        { mkShellNoCC, reuse, ... }:
         mkShellNoCC {
           inputsFrom = [
             config.pre-commit.devShell
             config.treefmt.build.devShell
           ];
-          nativeBuildInputs = [
-            reuse
-          ];
+          nativeBuildInputs = [ reuse ];
         }
       ) { };
       config.pre-commit.settings.hooks.eclint.enable = true;
@@ -134,9 +128,7 @@ in
       config.treefmt.programs.deadnix.no-lambda-pattern-names = true;
       config.treefmt.programs.nixfmt.enable = true;
       config.treefmt.programs.statix.enable = true;
-      config.treefmt.programs.statix.disabled-lints = [
-        "deprecated_is_null"
-      ];
+      config.treefmt.programs.statix.disabled-lints = [ "deprecated_is_null" ];
       config.treefmt.projectRootFile = ".envrc";
     };
   config.systems = lib.systems.flakeExposed;

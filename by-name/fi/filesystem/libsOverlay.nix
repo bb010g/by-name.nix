@@ -16,24 +16,15 @@ let
     readDirectory
     readShardedDirectory
     ;
-  inherit (finalLib.lists)
-    concatMap
-    head
-    length
-    ;
-  inherit (finalLib.path)
-    dirOf
-    ;
+  inherit (finalLib.lists) concatMap head length;
+  inherit (finalLib.path) dirOf;
   inherit (finalLib.strings)
     concatMapStringsSep
     escapeNixIdentifier
     match
     toString
     ;
-  inherit (finalLib.trivial)
-    isFunction
-    isNull
-    ;
+  inherit (finalLib.trivial) isFunction isNull;
 
   finalLib = finalArgs.lib;
 
