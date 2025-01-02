@@ -3,7 +3,7 @@
 {
   description = "Nix library for name-based, tabular directories";
 
-  inputs.nixpkgs.url = "github:nix-community/nixpkgs.lib";
+  inputs.nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
 
-  outputs = inputs: import ./default.nix { inherit (inputs.nixpkgs) lib; };
+  outputs = inputs: import ./default.nix { inherit (inputs.nixpkgs-lib) lib; };
 }
